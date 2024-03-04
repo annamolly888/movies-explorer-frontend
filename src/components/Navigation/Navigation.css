@@ -74,6 +74,7 @@
     color: #fff;
     text-decoration: none;
     transition: opacity 0.3s linear 0s;
+    align-self: center;
   }
   
   .header__movies_go-to_main {
@@ -118,10 +119,6 @@
     min-height: 26px;
     border-radius: 50px;
     margin-left: 11px;
-  }
-  
-  .header__account-logo_color_blue {
-    background-color: #0d4a64;
   }
   
   .header__burger-btn {

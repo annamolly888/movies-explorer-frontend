@@ -7,18 +7,22 @@ function Navigation({isloggedIn}) {
   const body = document.querySelector("body");
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = React.useState(false);
 
-  console.log(isBurgerMenuOpen);
-
+  React.useEffect(() => {
+    if (isBurgerMenuOpen) {
+      body.classList.add("body", "body_status_locked");
+    } else {
+      body.classList.remove("body_status_locked");
+    }      
+  }, [isBurgerMenuOpen, body]);
+  
   function handleBurgerBtnClick() {
     setIsBurgerMenuOpen(!isBurgerMenuOpen);
-    body.classList.toggle("body_status_locked");
   }
-
+  
   function handleMenuLinkClick() {
-    body.classList.remove("body_status_locked");
     setIsBurgerMenuOpen(false);
-  }
-
+  }  
+  
   return (
     <div className={`header__wrapper ${isBurgerMenuOpen ? "open" : ""}`}>
       {!isloggedIn ? (
@@ -79,7 +83,7 @@ function Navigation({isloggedIn}) {
                 onClick={handleMenuLinkClick}
               >
                 Аккаунт
-                <div className={`header__account-logo ${location.pathname === '/' ? 'header__account-logo_color_blue' : ''}`}></div>
+                <div className='header__account-logo'></div>
               </Link>
             </div>
           </div>

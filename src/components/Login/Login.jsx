@@ -49,7 +49,6 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
             name='email'
             value={email || ""}
             onChange={handleChange}
-            errors={errors}
             required
           />
           <span className='input__error'>{errors.email}</span>
@@ -65,7 +64,6 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
             name='password'
             value={password || ""}
             onChange={handleChange}
-            errors={errors}
             required
           />
           <span className='input__error'>{errors.password}</span>

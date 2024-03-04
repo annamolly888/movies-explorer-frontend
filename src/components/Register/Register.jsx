@@ -49,7 +49,7 @@ function Register() {
             name='name'
             value={name || ""}
             onChange={handleChange}
-            errors={errors}
+            placeholder="Имя"
             required
           />
           <span className='input__error'>{errors.name}</span>
@@ -64,8 +64,8 @@ function Register() {
             }`}
             name='email'
             value={email || ""}
+            placeholder="email"
             onChange={handleChange}
-            errors={errors}
             required
           />
           <span className='input__error'>{errors.email}</span>
@@ -80,8 +80,8 @@ function Register() {
             }`}
             name='password'
             value={password || ""}
+            placeholder="password"
             onChange={handleChange}
-            errors={errors}
             required
           />
         </div>

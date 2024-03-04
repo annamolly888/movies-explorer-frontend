@@ -9,7 +9,7 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
   const navigate = useNavigate();
   const inputElements = document.querySelectorAll("input");
   const [isEdition, setIsEdition] = React.useState(false);
-  const { values, handleChange, errors, setValues, isFormValid } = ValidateForm(
+  const { values, handleChange, setValues, isFormValid } = ValidateForm(
     {}
   );
   const { name, email } = values;
@@ -63,7 +63,6 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
               onChange={handleChange}
               disabled
               required
-              errors={errors}
             />
             <label className='profile__label'>E-mail</label>
             <input
@@ -75,7 +74,6 @@ function Profile({ setIsLoggedIn, isLoggedIn }) {
               onChange={handleChange}
               disabled
               required
-              errors={errors}
             />
           </div>
 
