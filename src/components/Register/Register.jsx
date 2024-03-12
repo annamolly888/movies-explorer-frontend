@@ -1,31 +1,21 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import ValidateForm from "../../hooks/ValidateForm";
+import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Register() {
+function Register({onRegister, isLoading}) {
   const {
     values,
     handleChange,
-    setValues,
     errors,
     isFormValid,
     inputValidation,
-  } = ValidateForm({});
+  } = useValidateForm({});
   const { name, email, password } = values;
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    setValues({
-      name: "Виталий",
-      email: "pochta@yandex.ru",
-      password: "12345678912345",
-    });
-  }, [setValues]);
+  
 
   function handleSubmit(e) {
     e.preventDefault();
-    navigate("/signin", { replace: true });
+    onRegister(values);
   }
 
   return (
@@ -35,7 +25,7 @@ function Register() {
       authPath='/signin'
       authWay='Войти'
     >
-      <form className='auth__form' onSubmit={handleSubmit} noValidate>
+      <form className='auth__form' onSubmit={handleSubmit} noValidate autoComplete="off">
         <div className='auth__inputs-container'>
           <label htmlFor='name' className='auth__label'>
             Имя
@@ -50,6 +40,9 @@ function Register() {
             value={name || ""}
             onChange={handleChange}
             placeholder="Имя"
+            minLength={2}
+            disabled={isLoading}
+            autoComplete="off"
             required
           />
           <span className='input__error'>{errors.name}</span>
@@ -66,6 +59,9 @@ function Register() {
             value={email || ""}
             placeholder="email"
             onChange={handleChange}
+            minLength={3}
+            disabled={isLoading}
+            autoComplete="off"
             required
           />
           <span className='input__error'>{errors.email}</span>
@@ -82,16 +78,19 @@ function Register() {
             value={password || ""}
             placeholder="password"
             onChange={handleChange}
+            minLength={3}
+            disabled={isLoading}
+            autoComplete="off"
             required
           />
+         <span className='input__error'>{errors.password}</span>
         </div>
-        <span className='input__error'>{errors.password}</span>
         <button
-          className={`${!isFormValid ? "button__disabled" : "auth__button"}`}
+          className={`${!isFormValid || isLoading ? "button__disabled" : "auth__button"}`}
           type='submit'
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
         >
-          Зарегистрироваться
+          {isLoading ? 'Регистрация...' : 'Зарегистрироваться'}
         </button>
       </form>
     </AuthForm>
