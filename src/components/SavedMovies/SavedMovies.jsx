@@ -1,4 +1,6 @@
 import React from "react";
+import { useLocation } from 'react-router-dom';
+
 import "./SavedMovies.css";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
@@ -14,6 +16,15 @@ function SavedMovies({
   pageText,
   setPageText
 }) {
+
+  const location = useLocation();
+
+  React.useEffect(() => {
+    if (location.pathname === "/saved-movies") {
+    setSavedMovies(movies); // if movies is your original list of saved movies
+    }
+  }, [location, setSavedMovies, movies]);
+
   return (
     <main className='saved-movies'>
        <SearchForm

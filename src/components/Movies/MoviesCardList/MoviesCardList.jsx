@@ -20,8 +20,6 @@ function MoviesCardList({
   const { amountOfMovies, handleShowMoreBtnClick, isShowMoreBtnVisible } =
   useRenderMovies({ movies });
 
-  console.log(movies);
-
   return (
     <section className="movies-list" aria-label="Секция с фильмами">
             {isLoading && <Preloader />}

@@ -34,15 +34,9 @@ function SearchForm({
       setValue(searchMoviesHistory.inputValue);
       setIsShort(searchMoviesHistory.isShort);
       setMovies(searchMoviesHistory.data);
-    } else if (savedMoviesPath && "searchSavedMoviesHistory" in localStorage) {
-      const searchSavedMoviesHistory = JSON.parse(
-        localStorage.getItem("searchSavedMoviesHistory")
-      );
-      setValue(searchSavedMoviesHistory.inputValue);
-      setIsShort(searchSavedMoviesHistory.isShort);
-      setSavedMovies(searchSavedMoviesHistory.data);
     }
-  }, [allMoviesPath, savedMoviesPath, setMovies, setSavedMovies]);
+  }, [allMoviesPath, setMovies]);
+  
 
   React.useEffect(() => {
     if (movies.length === 0 && value === "") {

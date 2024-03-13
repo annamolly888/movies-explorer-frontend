@@ -143,7 +143,7 @@ function App() {
       data = data.filter((movie) => movie.duration < SHORT_MOVIE_DURATION);
     }
 
-    if (data.length !== 0 && location.pathname === "/movies") {
+    if (data.length !== 0 && location.pathname !== "/saved-movies") {
       setFilteredMovies(data);
       localStorage.setItem(
         "searchMoviesHistory",
@@ -151,10 +151,6 @@ function App() {
       );
     } else if (data.length !== 0 && location.pathname === "/saved-movies") {
       setFilteredSavedMovies(data);
-      localStorage.setItem(
-        "searchSavedMoviesHistory",
-        JSON.stringify({ data, inputValue, isShort })
-      );
     } else {
       setFilteredMovies([]);
       setFilteredSavedMovies([]);
