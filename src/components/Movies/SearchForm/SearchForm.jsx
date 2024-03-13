@@ -23,6 +23,10 @@ function SearchForm({
   const [disabled, setDisabled] = React.useState(false);
 
   React.useEffect(() => {
+    setIsShort(false);
+  }, []); 
+
+  React.useEffect(() => {
     if (allMoviesPath && "searchMoviesHistory" in localStorage) {
       const searchMoviesHistory = JSON.parse(
         localStorage.getItem("searchMoviesHistory")

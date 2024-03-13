@@ -21,13 +21,14 @@ function FilterCheckbox({ isShort, setIsShort, value, onChecked, disabled }) {
         <label
           htmlFor='switch'
           className={`filter-checkbox__visible-switcher ${
-            disabled ? "filter-checkbox__visible-switcher_status_disabled" : ""
+            disabled ? 'filter-checkbox__visible-switcher_status_disabled' : isShort ? 'filter-checkboxvisible-switcher_status_active' : 'filter-checkbox__visible-switcher_status_intermediate'
           }`}
         ></label>
         <p className='filter-checkbox__text'>Короткометражки</p>
       </div>
     </div>
   );
+  
 }
 
 export default FilterCheckbox;
