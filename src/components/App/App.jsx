@@ -43,8 +43,10 @@ function App() {
           setCurrentUser(userData);
         })
         .catch((err) => {
+          handleOpenInfoToolTip(true, false, toolTipMessages.getSavedMoviesErrorMessage);
           console.log(err);
         });
+  
     }
   }, [isLoggedIn]);
 
@@ -126,8 +128,9 @@ function App() {
         );
       })
       .catch((err) => {
+        handleOpenInfoToolTip(true, false, toolTipMessages.updateUserInfoErrorMessage);
         console.log(err);
-      })
+      })  
       .finally(() => {
         setIsLoading(false);
       });
@@ -214,8 +217,9 @@ function App() {
           setSavedMovies((movies) => [...movies, savedMovie.data])
         )
         .catch((err) => {
+          handleOpenInfoToolTip(true, false, toolTipMessages.saveMovieErrorMessage);
           console.log(err);
-        });
+        });  
     } else {
       const id = savedMovies.find(
         (savedMovie) => savedMovie.movieId === movie.movieId
@@ -229,8 +233,9 @@ function App() {
           );
         })
         .catch((err) => {
+          handleOpenInfoToolTip(true, false, toolTipMessages.deleteMovieErrorMessage);
           console.log(err);
-        });
+        });    
     }
   }
 
@@ -248,8 +253,9 @@ function App() {
         )
       )
       .catch((err) => {
+        handleOpenInfoToolTip(true, false, toolTipMessages.deleteMovieErrorMessage);
         console.log(err);
-      });
+      });  
   }
 
   // Проверить токен

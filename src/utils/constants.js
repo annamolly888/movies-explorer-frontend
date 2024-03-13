@@ -5,7 +5,11 @@ export const toolTipMessages = {
   updateProfileSuccessMessage: "Данные успешно обновлены",
   serverConnectionError: "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
   tokenCheckError: "При проверке токена произошла ошибка, авторизуйтесь ещё раз",
-  moviesSearchError: "Введите ключевое слово для поиска"
+  moviesSearchError: "Введите ключевое слово для поиска",
+  getSavedMoviesErrorMessage: "Ошибка при загрузке списка фильмов. Попробуйте позже",
+  updateUserInfoErrorMessage: "Ошибка при обновлении данных. Попробуйте еще раз",
+  saveMovieErrorMessage: "Ошибка при сохранении фильма",
+  deleteMovieErrorMessage: "Не удалось удалить фильм"
 };
 
 export const profileUpdateErrors = {
