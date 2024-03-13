@@ -102,9 +102,14 @@ function App() {
 
   // Выход из профиля
   function handleLogout() {
-    setIsLoggedIn(false);
-    localStorage.clear();
-    navigate("/", { replace: true });
+    setIsLoggedIn(false); 
+    localStorage.clear(); 
+    setCurrentUser({}); 
+    setMovies([]); 
+    setFilteredMovies([]); 
+    setSavedMovies([]); 
+    setFilteredSavedMovies([]); 
+    navigate("/", { replace: true }); 
   }
 
   // Обновление информации юзера

@@ -20,35 +20,7 @@ function MoviesCardList({
   const { amountOfMovies, handleShowMoreBtnClick, isShowMoreBtnVisible } =
   useRenderMovies({ movies });
 
-  // Определение начального количества в зависимости от размера окна браузера
-  // const getInitialItemCount = () => {
-  //   if (window.innerWidth <= 320) { 
-  //     return 5; 
-  //   } else if (window.innerWidth <= 768) { 
-  //     return 8; 
-  //   } else { 
-  //     return movies.length; 
-  //   }
-  // };
-
-  // const [shownItemsCount, setShownItemsCount] = useState(getInitialItemCount());
-
-  // useEffect(() => {
-  //   // Функция, вызываемая при изменении размера окна
-  //   const handleResize = () => {
-  //     setShownItemsCount(getInitialItemCount());
-  //   };
-
-  //   window.addEventListener("resize", handleResize);
-  
-  //   // Обязательно удаляем обработчик события при размонтировании компонента
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
-  // const showMore = () => {
-  //   setShownItemsCount(shownItemsCount + 5);
-  // };
-
+  console.log(movies);
 
   return (
     <section className="movies-list" aria-label="Секция с фильмами">
