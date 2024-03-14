@@ -51,7 +51,7 @@ class MainApi {
     }
   
     // Получение информации о пользователе
-    getUserInfo() {
+    getUserInfo(jwt) {
       return fetch(`${this.baseUrl}/users/me`, {
         method: "GET",
         headers: {

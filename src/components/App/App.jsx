@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -62,34 +62,43 @@ function App() {
     setIsInfoToolTipOpened(false);
   }
 
+  const [token, setToken] = useState(null);
+
   // Авторизация юзера
   function handleLogin({ email, password }) {
-    setIsLoading(true);
-    mainApi
-      .authorize({ email, password })
+    mainApi.authorize({ email, password })
       .then((res) => {
         if (res.token) {
-          localStorage.setItem("jwt", res.token);
-          setIsLoggedIn(true);
-          navigate("/movies", { replace: true });
+          setToken(res.token);
+          localStorage.setItem('jwt', res.token); 
+        } else {
+          throw new Error("Token not returned after login");
         }
+        return mainApi.getUserInfo(res.token); 
+      })
+      .then((res) => {
+        setIsLoggedIn(true);
+        if (res.data) {
+          console.log(res)
+          setCurrentUser(res.data);
+        }
+        navigate(`${location.pathname}${location.search}`, { replace: true });
       })
       .catch((err) => {
-        handleOpenInfoToolTip(true, false, toolTipMessages.signinErrorMessage);
-        setIsLoggedIn(false);
         console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
+        setIsLoggedIn(false);
+        setCurrentUser({});
+        navigate("/signin", { replace: true });
+        handleOpenInfoToolTip(true, false, toolTipMessages.tokenCheckError);
       });
   }
-
+  
   // Регистрация юзера
   function handleRegister({ name, email, password }) {
     setIsLoading(true);
     mainApi
       .register({ name, email, password })
-      .then(() => {
+      .then((res) => {
         handleLogin({ email, password });
         handleOpenInfoToolTip(true, true, toolTipMessages.signupSuccessMessage);
       })
@@ -270,7 +279,11 @@ function App() {
             setIsLoggedIn(true);
             setCurrentUser(res.data);
             navigate(`${location.pathname}${location.search}`, { replace: true });
-          }
+          } else {
+            // Если нет токена в localStorage, считаем, что пользователь не авторизован
+            setIsLoggedIn(false);
+            setCurrentUser({});
+          }        
         })
         .catch((err) => {
           console.log(err);
