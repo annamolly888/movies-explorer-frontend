@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -19,20 +19,22 @@ function Footer() {
           <ul className='footer__copyright-container'>
             <li className='footer__copyright'>&#169; 2024</li>
             <li className='footer__copyright'>
-              <Link
-                to='https://practicum.yandex.ru/'
+            <a
+                href='https://practicum.yandex.ru/'
                 className='footer__link'
-                target='blank'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 Яндекс.Практикум
-              </Link>
-              <Link
-                to='https://github.com/annamolly888'
+                </a>
+              <a
+                href='https://github.com/annamolly888'
                 className='footer__link'
-                target='blank'
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 Github
-              </Link>
+                </a>
             </li>
           </ul>
         </div>

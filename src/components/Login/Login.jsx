@@ -1,31 +1,20 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import ValidateForm from "../../hooks/ValidateForm";
+import useValidateForm from "../../hooks/useValidateForm";
 import AuthForm from "../AuthForm/AuthForm";
 
-function Login({ setIsLoggedIn, isLoggedIn }) {
+function Login({ onLogin, isLoading }) {
   const {
     values,
     handleChange,
-    setValues,
     errors,
     isFormValid,
     inputValidation,
-  } = ValidateForm({});
+  } = useValidateForm({});
   const { email, password } = values;
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    setValues({
-      email: "pochta@yandex.ru",
-      password: "12345678912345",
-    });
-  }, [setValues]);
 
   function handleSubmit(e) {
     e.preventDefault();
-    setIsLoggedIn(true);
-    navigate("/movies", { replace: true });
+    onLogin(values);
   }
 
   return (
@@ -35,7 +24,7 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
       authPath='/signup'
       authWay='Регистрация'
     >
-      <form className='auth__form' onSubmit={handleSubmit} noValidate>
+      <form className='auth__form' onSubmit={handleSubmit} noValidate autoComplete="off">
         <div className='auth__inputs-container'>
           <label htmlFor='email' className='auth__label'>
             E-mail
@@ -49,6 +38,10 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
             name='email'
             value={email || ""}
             onChange={handleChange}
+            placeholder="Email"
+            minLength={3}
+            disabled={isLoading}
+            autoComplete="off"
             required
           />
           <span className='input__error'>{errors.email}</span>
@@ -64,16 +57,20 @@ function Login({ setIsLoggedIn, isLoggedIn }) {
             name='password'
             value={password || ""}
             onChange={handleChange}
+            placeholder="password"
+            minLength={3}
+            disabled={isLoading}
+            autoComplete="off"
             required
           />
           <span className='input__error'>{errors.password}</span>
         </div>
         <button
-          className={`${!isFormValid ? "button__disabled" : "auth__button"}`}
+          className={`${!isFormValid || isLoading ? "button__disabled" : "auth__button"}`}
           type='submit'
-          disabled={!isFormValid}
+          disabled={!isFormValid || isLoading}
         >
-          Войти
+          {isLoading ? "Выполняется вход..." : "Войти"}
         </button>
       </form>
     </AuthForm>
